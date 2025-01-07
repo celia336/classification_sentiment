@@ -1,0 +1,14 @@
+batch_size: 16
+epochs: 3
+learning_rate: 2e-5
+max_len: 128
+model_name: "bert-base-uncased"
+num_labels: 2  # Par exemple, pour sentiments positifs/négatifs
+
+# Configuration pour la collecte des tweets
+keywords:
+  - "AI"
+  - "MachineLearning"
+  - "#DataScience"
+count: 100
+lang: "fr"
