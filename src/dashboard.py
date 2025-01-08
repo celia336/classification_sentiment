@@ -23,6 +23,7 @@ bar_chart = px.bar(
     labels={'sentiment': 'Sentiment', 'count': 'Nombre'},
     title="Répartition des Sentiments (Bar Chart)",
     color='sentiment',
+    color_discrete_map={"Positive": "#2ecc71", "Negative": "#e74c3c", "Neutral": "#3498db"},
 )
 
 pie_chart = px.pie(
@@ -30,49 +31,86 @@ pie_chart = px.pie(
     names='sentiment',
     values='count',
     title="Répartition des Sentiments (Pie Chart)",
-    color='sentiment'
+    color='sentiment',
+    color_discrete_map={"Positive": "#2ecc71", "Negative": "#e74c3c", "Neutral": "#3498db"},
 )
 
 # Application Dash
 app = dash.Dash(__name__)
 
+app.css.config.serve_locally = True
+app.title = "Sentiment Dashboard"
+
+# Mise en page de l'application
 app.layout = html.Div([
-    html.H1("Dashboard des Sentiments", style={'textAlign': 'center'}),
-
-    # Dropdown pour filtrer par sentiment
     html.Div([
-        html.Label("Filtrer par Sentiment :"),
-        dcc.Dropdown(
-            id='sentiment-filter',
-            options=[
-                {'label': 'Tous', 'value': 'all'},
-                {'label': 'Positif', 'value': 'Positive'},
-                {'label': 'Négatif', 'value': 'Negative'},
-                {'label': 'Neutre', 'value': 'Neutral'},
-            ],
-            value='all',  # Valeur par défaut
-            clearable=False
-        )
-    ], style={'marginBottom': '20px', 'width': '50%'}),
+        # Barre latérale pour les filtres
+        html.Div([
+            html.H2("Contrôles", style={'color': '#2c3e50'}),
+            html.Label("Filtrer par Sentiment :", style={'marginTop': '20px', 'color': '#34495e'}),
+            dcc.Dropdown(
+                id='sentiment-filter',
+                options=[
+                    {'label': 'Tous', 'value': 'all'},
+                    {'label': 'Positif', 'value': 'Positive'},
+                    {'label': 'Négatif', 'value': 'Negative'},
+                    {'label': 'Neutre', 'value': 'Neutral'},
+                ],
+                value='all',  # Valeur par défaut
+                clearable=False,
+                style={'width': '100%', 'marginBottom': '20px'}
+            )
+        ], style={
+            'padding': '20px',
+            'backgroundColor': '#f7dc6f',  # Jaune clair pour la barre latérale
+            'borderRadius': '10px',
+            'boxShadow': '0px 2px 5px rgba(0,0,0,0.1)',
+            'flex': '1'
+        }),
 
-    # Tableau
-    html.Div([
-        dash_table.DataTable(
-            id='sentiment-table',
-            columns=[{"name": col, "id": col} for col in df.columns],
-            data=df.to_dict('records'),
-            style_table={'overflowX': 'auto'},
-            style_cell={'textAlign': 'left', 'padding': '5px'},
-            style_header={'backgroundColor': 'lightgrey', 'fontWeight': 'bold'},
-        )
-    ], style={'marginBottom': '30px'}),
+        # Contenu principal
+        html.Div([
+            html.H1("Dashboard des Sentiments", style={
+                'textAlign': 'center', 
+                'color': '#2c3e50', 
+                'marginBottom': '30px'
+            }),
 
-    # Graphiques
-    html.Div([
-        dcc.Graph(id='bar-chart', figure=bar_chart),
-        dcc.Graph(id='pie-chart', figure=pie_chart),
-    ], style={'display': 'flex', 'gap': '30px'})
-])
+            # Tableau des textes
+            html.Div([
+                html.H4("Tableau des Textes", style={'color': '#34495e'}),
+                dash_table.DataTable(
+                    id='sentiment-table',
+                    columns=[{"name": col, "id": col} for col in df.columns],
+                    data=df.to_dict('records'),
+                    style_table={'overflowX': 'auto'},
+                    style_cell={'textAlign': 'left', 'padding': '5px'},
+                    style_header={'backgroundColor': '#2c3e50', 'color': 'white', 'fontWeight': 'bold'},
+                )
+            ], style={
+                'marginBottom': '30px',
+                'backgroundColor': '#fef9e7',  # Jaune clair pour le tableau
+                'padding': '20px',
+                'borderRadius': '10px',
+                'boxShadow': '0px 2px 5px rgba(0,0,0,0.1)'
+            }),
+
+            # Graphiques
+            html.Div([
+                dcc.Graph(id='bar-chart', figure=bar_chart, style={'flex': '1'}),
+                dcc.Graph(id='pie-chart', figure=pie_chart, style={'flex': '1'}),
+            ], style={
+                'display': 'flex',
+                'gap': '20px',
+                'justifyContent': 'space-between',
+            }),
+        ], style={'flex': '3'})
+    ], style={'display': 'flex', 'gap': '20px', 'padding': '20px'})
+], style={
+    'backgroundColor': '#f9e79f',  # Fond jaune global
+    'padding': '20px',
+    'minHeight': '100vh'  # Prend toute la hauteur de la fenêtre
+})
 
 # Callback pour mettre à jour le tableau et les graphiques en fonction du filtre
 @app.callback(
@@ -101,6 +139,7 @@ def update_dashboard(selected_sentiment):
         labels={'sentiment': 'Sentiment', 'count': 'Nombre'},
         title="Répartition des Sentiments (Bar Chart)",
         color='sentiment',
+        color_discrete_map={"Positive": "#2ecc71", "Negative": "#e74c3c", "Neutral": "#3498db"},
     )
 
     updated_pie_chart = px.pie(
@@ -109,6 +148,7 @@ def update_dashboard(selected_sentiment):
         values='count',
         title="Répartition des Sentiments (Pie Chart)",
         color='sentiment',
+        color_discrete_map={"Positive": "#2ecc71", "Negative": "#e74c3c", "Neutral": "#3498db"},
     )
 
     return table_data, updated_bar_chart, updated_pie_chart
