@@ -7,9 +7,9 @@ from utils import clean_text
 def preprocess_data(input_file, output_csv):
     """
     Cette fonction effectue le prétraitement des tweets et les exporte dans un fichier CSV.
-    Elle nettoie le texte des tweets et les enregistre dans un fichier CSV.
+    Elle nettoie le texte des tweets et les enregistre dans un fichier CSV, tout en conservant les labels existants.
     
-    :param input_file: Le chemin vers le fichier d'entrée contenant les tweets bruts.
+    :param input_file: Le chemin vers le fichier d'entrée contenant les tweets et leurs labels.
     :param output_csv: Le chemin où le fichier CSV nettoyé sera sauvegardé.
     """
     # Vérifier si le fichier d'entrée existe
@@ -20,24 +20,36 @@ def preprocess_data(input_file, output_csv):
     # Charger les données depuis le fichier texte (tweets.txt)
     print(f"Chargement des tweets depuis {input_file}...")
     try:
-        # On suppose que les tweets sont sous une forme de texte brut
+        # On suppose que les tweets sont sous une forme de texte brut avec le label à la fin
         with open(input_file, 'r', encoding='utf-8') as file:
-            tweets = file.readlines()
+            lines = file.readlines()
         
-        if len(tweets) == 0:
+        if len(lines) == 0:
             print(f"Erreur : Le fichier {input_file} est vide.")
             return
         
-        # Créer un DataFrame avec une colonne 'text' pour les tweets
-        df = pd.DataFrame(tweets, columns=['text'])
+        # Préparer les listes pour les textes et les labels
+        texts = []
+        labels = []
         
-        # Vérifier les 5 premières lignes pour s'assurer du format des données
-        print(f"Quelques tweets chargés depuis {input_file} :\n{df.head()}")
-
-        # Ajouter une colonne 'label' (ici, vous pouvez choisir un label par défaut ou le laisser vide)
-        df['label'] = 'neutral'  # Remplacez par des labels réels si disponible
-        print(f"Structure du DataFrame après ajout de la colonne 'label' :\n{df.head()}")
-
+        for line in lines:
+            # Séparer le texte et le label à partir du dernier espace
+            parts = line.rsplit(' ', 1)  # Sépare à partir du dernier espace
+            if len(parts) == 2:
+                text = parts[0].strip()  # Texte sans espaces autour
+                label = parts[1].strip()  # Label sans espaces autour
+                texts.append(text)
+                labels.append(label)
+        
+        # Créer un DataFrame avec les colonnes 'text' et 'label'
+        df = pd.DataFrame({
+            'text': texts,
+            'label': labels
+        })
+        
+        # Vérification du contenu du DataFrame
+        print(f"Quelques lignes chargées depuis le fichier texte :\n{df.head()}")
+        
         # Appliquer le nettoyage sur le texte des tweets
         print("Nettoyage du texte des tweets...")
         df['cleaned_text'] = df['text'].apply(clean_text)
@@ -48,12 +60,12 @@ def preprocess_data(input_file, output_csv):
         # Sauvegarder le DataFrame dans un fichier CSV
         print(f"Exportation des données vers {output_csv}...")
         df.to_csv(output_csv, index=False, encoding='utf-8')
-        print(f"Le fichier cleaned_tweets.csv a été sauvegardé sous {output_csv}.")
+        print(f"Le fichier a été sauvegardé sous {output_csv}.")
         
     except Exception as e:
         print(f"Erreur lors de la lecture ou de l'écriture du fichier : {e}")
 
 # Exemple d'appel de la fonction
-input_file = 'data/raw/tweets.txt'  # Vérifiez que ce chemin est correct
-output_csv = 'data/processed/cleaned_tweets.csv'
+input_file = 'data/raw/tweets.txt'  # Chemin vers votre fichier d'entrée contenant les tweets et labels
+output_csv = 'data/processed/cleaned_tweets.csv'  # Chemin où vous voulez enregistrer le fichier CSV
 preprocess_data(input_file, output_csv)

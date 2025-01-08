@@ -1,69 +1,35 @@
 text,label,cleaned_text
-"J'adore cette nouvelle application, elle rend tout tellement plus facile !  
-",neutral,jadore cette nouvelle application rend tout tellement plus facile
-"Je suis tellement heureux d'avoir eu ce job, c'est vraiment une chance pour moi.  
-",neutral,tellement heureux davoir job cest vraiment chance
-"Je n'aime pas du tout ce film, il était long et ennuyeux.  
-",neutral,naime tout film long ennuyeux
-"Le service dans ce restaurant est déplorable, je ne reviendrai plus jamais.  
-",neutral,service restaurant déplorable reviendrai plus jamais
-"Cette nouvelle chanson est incroyable ! Elle me met de bonne humeur à chaque écoute.  
-",neutral,cette nouvelle chanson incroyable met bonne humeur chaque écoute
-"Quelqu'un a un bon livre à me recommander ? Je cherche quelque chose de passionnant.  
-",neutral,quelquun a bon livre recommander cherche quelque chose passionnant
-"La pluie n'arrête pas, ça me met de mauvaise humeur.  
-",neutral,pluie narrête ça met mauvaise humeur
-"Aujourd'hui a été une journée moyenne, ni bonne ni mauvaise, juste normale.  
-",neutral,aujourdhui a journée moyenne ni bonne ni mauvaise juste normale
-"C'était un voyage exceptionnel, chaque moment était parfait.  
-",neutral,cétait voyage exceptionnel chaque moment parfait
-"Le livre que je viens de lire était assez ennuyeux, je n'ai pas aimé.  
-",neutral,livre viens lire assez ennuyeux nai aimé
-"Je viens de finir mon marathon d'entraînement, je me sens vraiment fier de moi !  
-",neutral,viens finir marathon dentraînement sens vraiment fier
-"Je suis fatigué de toujours avoir les mêmes problèmes avec ce logiciel, c'est frustrant.  
-",neutral,fatigué toujours avoir mêmes problèmes logiciel cest frustrant
-"Les vacances à la plage étaient fantastiques, j'ai pu vraiment me détendre.  
-",neutral,vacances plage fantastiques jai pu vraiment détendre
-"Je trouve que les gens dans cette ville sont très accueillants et sympathiques.  
-",neutral,trouve gens cette ville très accueillants sympathiques
-"Je déteste attendre dans la file d'attente pendant des heures, c'est un vrai cauchemar.  
-",neutral,déteste attendre file dattente pendant heures cest vrai cauchemar
-"Ce film était un chef-d'œuvre, tout était parfait, de l'histoire à la réalisation.  
-",neutral,film chefdœuvre tout parfait lhistoire réalisation
-"Je n'aime pas du tout ce restaurant, la nourriture était froide et sans saveur.  
-",neutral,naime tout restaurant nourriture froide sans saveur
-"Le livre était bon, mais un peu trop prévisible.  
-",neutral,livre bon peu trop prévisible
-"J'ai été très stressé cette semaine, mais j'ai réussi à tout finir à temps.  
-",neutral,jai très stressé cette semaine jai réussi tout finir temps
-"J'ai commencé à apprendre la guitare, c'est difficile mais excitant !  
-",neutral,jai commencé apprendre guitare cest difficile excitant
-"J'ai passé une journée tranquille chez moi, à lire et à regarder des séries.  
-",neutral,jai passé journée tranquille chez lire regarder séries
-"C'était une expérience moyenne, rien d'exceptionnel mais pas désagréable non plus.  
-",neutral,cétait expérience moyenne rien dexceptionnel désagréable non plus
-"Le concert était incroyable, j'ai adoré chaque minute.  
-",neutral,concert incroyable jai adoré chaque minute
-"J'ai essayé un nouveau plat aujourd'hui, mais je n'ai pas du tout aimé.  
-",neutral,jai essayé nouveau plat aujourdhui nai tout aimé
-"Je suis tellement déçu de l'événement d'aujourd'hui, c'était mal organisé et chaotique.  
-",neutral,tellement déçu lévénement daujourdhui cétait mal organisé chaotique
-"Ce film est un véritable chef-d'œuvre, tout était parfait, j'ai pleuré de joie !  
-",neutral,film véritable chefdœuvre tout parfait jai pleuré joie
-"Je n'ai pas eu une bonne expérience avec ce produit, il est tombé en panne après une semaine.  
-",neutral,nai bonne expérience produit tombé panne après semaine
-"Je trouve cette application facile à utiliser, c'est exactement ce que je cherchais.  
-",neutral,trouve cette application facile utiliser cest exactement cherchais
-"La journée a été médiocre, mais j'ai pu quand même accomplir quelques tâches importantes.  
-",neutral,journée a médiocre jai pu quand accomplir quelques tâches importantes
-"J'ai reçu une excellente nouvelle aujourd'hui, je suis tellement heureux !  
-",neutral,jai reçu excellente nouvelle aujourdhui tellement heureux
-"Je trouve qu'il y a trop de bruit dehors, c'est difficile de se concentrer.  
-",neutral,trouve quil a trop bruit dehors cest difficile concentrer
-"La conférence était intéressante, mais un peu trop longue pour moi.  
-",neutral,conférence intéressante peu trop longue
-"Je suis dégoûté par le comportement de certaines personnes aujourd'hui, c'est insupportable.  
-",neutral,dégoûté comportement certaines personnes aujourdhui cest insupportable
-"Le parc était superbe, je recommande vivement d'y aller pour une balade.  
-",neutral,parc superbe recommande vivement dy aller balade
+"J'adore cette nouvelle application, elle rend tout tellement plus facile !",POSITIVE,jadore cette nouvelle application rend tout tellement plus facile
+"Je suis tellement heureux d'avoir eu ce job, c'est vraiment une chance pour moi.",POSITIVE,tellement heureux davoir job cest vraiment chance
+"Je n'aime pas du tout ce film, il était long et ennuyeux.",NEGATIVE,naime tout film long ennuyeux
+"Le service dans ce restaurant est déplorable, je ne reviendrai plus jamais.",NEGATIVE,service restaurant déplorable reviendrai plus jamais
+Cette nouvelle chanson est incroyable ! Elle me met de bonne humeur à chaque écoute.,POSITIVE,cette nouvelle chanson incroyable met bonne humeur chaque écoute
+Quelqu'un a un bon livre à me recommander ? Je cherche quelque chose de passionnant.,NEUTRAL,quelquun a bon livre recommander cherche quelque chose passionnant
+"La pluie n'arrête pas, ça me met de mauvaise humeur.",NEGATIVE,pluie narrête ça met mauvaise humeur
+"Aujourd'hui a été une journée moyenne, ni bonne ni mauvaise, juste normale.",NEUTRAL,aujourdhui a journée moyenne ni bonne ni mauvaise juste normale
+"C'était un voyage exceptionnel, chaque moment était parfait.",POSITIVE,cétait voyage exceptionnel chaque moment parfait
+"Le livre que je viens de lire était assez ennuyeux, je n'ai pas aimé.",NEGATIVE,livre viens lire assez ennuyeux nai aimé
+"Je viens de finir mon marathon d'entraînement, je me sens vraiment fier de moi !",POSITIVE,viens finir marathon dentraînement sens vraiment fier
+"Je suis fatigué de toujours avoir les mêmes problèmes avec ce logiciel, c'est frustrant.",NEGATIVE,fatigué toujours avoir mêmes problèmes logiciel cest frustrant
+"Les vacances à la plage étaient fantastiques, j'ai pu vraiment me détendre.",POSITIVE,vacances plage fantastiques jai pu vraiment détendre
+Je trouve que les gens dans cette ville sont très accueillants et sympathiques.,POSITIVE,trouve gens cette ville très accueillants sympathiques
+"Je déteste attendre dans la file d'attente pendant des heures, c'est un vrai cauchemar.",NEGATIVE,déteste attendre file dattente pendant heures cest vrai cauchemar
+"Ce film était un chef-d'œuvre, tout était parfait, de l'histoire à la réalisation.",POSITIVE,film chefdœuvre tout parfait lhistoire réalisation
+"Je n'aime pas du tout ce restaurant, la nourriture était froide et sans saveur.",NEGATIVE,naime tout restaurant nourriture froide sans saveur
+"Le livre était bon, mais un peu trop prévisible.",NEUTRAL,livre bon peu trop prévisible
+"J'ai été très stressé cette semaine, mais j'ai réussi à tout finir à temps.",POSITIVE,jai très stressé cette semaine jai réussi tout finir temps
+"J'ai commencé à apprendre la guitare, c'est difficile mais excitant !",POSITIVE,jai commencé apprendre guitare cest difficile excitant
+"J'ai passé une journée tranquille chez moi, à lire et à regarder des séries.",NEUTRAL,jai passé journée tranquille chez lire regarder séries
+"C'était une expérience moyenne, rien d'exceptionnel mais pas désagréable non plus.",NEUTRAL,cétait expérience moyenne rien dexceptionnel désagréable non plus
+"Le concert était incroyable, j'ai adoré chaque minute.",POSITIVE,concert incroyable jai adoré chaque minute
+"J'ai essayé un nouveau plat aujourd'hui, mais je n'ai pas du tout aimé.",NEGATIVE,jai essayé nouveau plat aujourdhui nai tout aimé
+"Je suis tellement déçu de l'événement d'aujourd'hui, c'était mal organisé et chaotique.",NEGATIVE,tellement déçu lévénement daujourdhui cétait mal organisé chaotique
+"Ce film est un véritable chef-d'œuvre, tout était parfait, j'ai pleuré de joie !",POSITIVE,film véritable chefdœuvre tout parfait jai pleuré joie
+"Je n'ai pas eu une bonne expérience avec ce produit, il est tombé en panne après une semaine.",NEGATIVE,nai bonne expérience produit tombé panne après semaine
+"Je trouve cette application facile à utiliser, c'est exactement ce que je cherchais.",POSITIVE,trouve cette application facile utiliser cest exactement cherchais
+"La journée a été médiocre, mais j'ai pu quand même accomplir quelques tâches importantes.",NEUTRAL,journée a médiocre jai pu quand accomplir quelques tâches importantes
+"J'ai reçu une excellente nouvelle aujourd'hui, je suis tellement heureux !",POSITIVE,jai reçu excellente nouvelle aujourdhui tellement heureux
+"Je trouve qu'il y a trop de bruit dehors, c'est difficile de se concentrer.",NEGATIVE,trouve quil a trop bruit dehors cest difficile concentrer
+"La conférence était intéressante, mais un peu trop longue pour moi.",NEUTRAL,conférence intéressante peu trop longue
+"Je suis dégoûté par le comportement de certaines personnes aujourd'hui, c'est insupportable.",NEGATIVE,dégoûté comportement certaines personnes aujourdhui cest insupportable
+"Le parc était superbe, je recommande vivement d'y aller pour une balade.",POSITIVE,parc superbe recommande vivement dy aller balade

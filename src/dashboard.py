@@ -1,45 +1,118 @@
 import dash
-from dash import dcc, html
-import plotly.express as px
+from dash import dcc, html, dash_table, Input, Output
 import pandas as pd
+import plotly.express as px
 
-# Charger les résultats des sentiments (par exemple, le fichier CSV exporté)
-df = pd.read_csv('data/processed/tweets_sentiment.csv')  # Assurez-vous que le chemin est correct
+# Chargement des données depuis le fichier CSV
+csv_file = "data/processed/tweets_sentiment.csv"  # Remplace par le nom de ton fichier CSV
+df = pd.read_csv(csv_file)
 
-# Créer un Dash app
+# Vérification des colonnes nécessaires
+if 'text' not in df.columns or 'sentiment' not in df.columns:
+    raise ValueError("Le fichier CSV doit contenir les colonnes 'text' et 'sentiment'.")
+
+# Calcul de la répartition des sentiments
+sentiment_counts = df['sentiment'].value_counts().reset_index()
+sentiment_counts.columns = ['sentiment', 'count']  # Renomme les colonnes
+
+# Création des graphiques
+bar_chart = px.bar(
+    sentiment_counts,
+    x='sentiment',
+    y='count',
+    labels={'sentiment': 'Sentiment', 'count': 'Nombre'},
+    title="Répartition des Sentiments (Bar Chart)",
+    color='sentiment',
+)
+
+pie_chart = px.pie(
+    sentiment_counts,
+    names='sentiment',
+    values='count',
+    title="Répartition des Sentiments (Pie Chart)",
+    color='sentiment'
+)
+
+# Application Dash
 app = dash.Dash(__name__)
 
-# Créer un graphique en camembert pour afficher la répartition des sentiments
-sentiment_counts = df['sentiment'].value_counts()
-fig = px.pie(values=sentiment_counts, names=sentiment_counts.index, title="Répartition des sentiments")
-
-# Créer un graphique de la tendance des sentiments au fil du temps
-df['created_at'] = pd.to_datetime(df['created_at'])
-df['date'] = df['created_at'].dt.date
-sentiment_by_date = df.groupby(['date', 'sentiment']).size().unstack(fill_value=0)
-fig2 = px.line(sentiment_by_date, x=sentiment_by_date.index, y=sentiment_by_date.columns, title="Évolution des sentiments au fil du temps")
-
-# Layout du dashboard avec deux graphiques
 app.layout = html.Div([
-    html.H1("Dashboard d'analyse des sentiments des tweets"),
-    
-    # Premier graphique : Répartition des sentiments
-    dcc.Graph(
-        id='sentiment-pie-chart',
-        figure=fig
-    ),
-    
-    # Deuxième graphique : Évolution des sentiments au fil du temps
-    dcc.Graph(
-        id='sentiment-time-line',
-        figure=fig2
-    )
+    html.H1("Dashboard des Sentiments", style={'textAlign': 'center'}),
+
+    # Dropdown pour filtrer par sentiment
+    html.Div([
+        html.Label("Filtrer par Sentiment :"),
+        dcc.Dropdown(
+            id='sentiment-filter',
+            options=[
+                {'label': 'Tous', 'value': 'all'},
+                {'label': 'Positif', 'value': 'Positive'},
+                {'label': 'Négatif', 'value': 'Negative'},
+                {'label': 'Neutre', 'value': 'Neutral'},
+            ],
+            value='all',  # Valeur par défaut
+            clearable=False
+        )
+    ], style={'marginBottom': '20px', 'width': '50%'}),
+
+    # Tableau
+    html.Div([
+        dash_table.DataTable(
+            id='sentiment-table',
+            columns=[{"name": col, "id": col} for col in df.columns],
+            data=df.to_dict('records'),
+            style_table={'overflowX': 'auto'},
+            style_cell={'textAlign': 'left', 'padding': '5px'},
+            style_header={'backgroundColor': 'lightgrey', 'fontWeight': 'bold'},
+        )
+    ], style={'marginBottom': '30px'}),
+
+    # Graphiques
+    html.Div([
+        dcc.Graph(id='bar-chart', figure=bar_chart),
+        dcc.Graph(id='pie-chart', figure=pie_chart),
+    ], style={'display': 'flex', 'gap': '30px'})
 ])
 
-# Fonction pour lancer le dashboard
-def launch_dashboard():
-    app.run_server(debug=True)
+# Callback pour mettre à jour le tableau et les graphiques en fonction du filtre
+@app.callback(
+    [Output('sentiment-table', 'data'),
+     Output('bar-chart', 'figure'),
+     Output('pie-chart', 'figure')],
+    [Input('sentiment-filter', 'value')]
+)
+def update_dashboard(selected_sentiment):
+    if selected_sentiment == 'all':
+        filtered_df = df
+    else:
+        filtered_df = df[df['sentiment'] == selected_sentiment]
 
-# Lancer l'app si ce fichier est exécuté directement
+    # Mettre à jour le tableau
+    table_data = filtered_df.to_dict('records')
+
+    # Mettre à jour les graphiques
+    sentiment_counts = filtered_df['sentiment'].value_counts().reset_index()
+    sentiment_counts.columns = ['sentiment', 'count']
+
+    updated_bar_chart = px.bar(
+        sentiment_counts,
+        x='sentiment',
+        y='count',
+        labels={'sentiment': 'Sentiment', 'count': 'Nombre'},
+        title="Répartition des Sentiments (Bar Chart)",
+        color='sentiment',
+    )
+
+    updated_pie_chart = px.pie(
+        sentiment_counts,
+        names='sentiment',
+        values='count',
+        title="Répartition des Sentiments (Pie Chart)",
+        color='sentiment',
+    )
+
+    return table_data, updated_bar_chart, updated_pie_chart
+
+
 if __name__ == '__main__':
-    launch_dashboard()
+    app.run_server(debug=True)

@@ -9,7 +9,9 @@ from utils import clean_text  # Fonction de nettoyage de texte
 # Fonction pour prédire le sentiment d'un tweet
 def predict_sentiment(tweet, model, word_to_idx, input_size=50):
     # Nettoyage du texte
-    cleaned_tweet = clean_text(tweet)
+    # Le tweet est déjà nettoyé dans la colonne 'cleaned_text' du fichier CSV
+    cleaned_tweet = tweet  # pas de nettoyage nécessaire
+
     # Créer un vecteur d'entrée pour le modèle
     tokenized_tweet = [word_to_idx.get(word, 0) for word in cleaned_tweet.split()]
     tokenized_tweet = tokenized_tweet[:input_size] + [0] * (input_size - len(tokenized_tweet))  # Compléter le vecteur

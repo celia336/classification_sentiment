@@ -59,7 +59,7 @@ def train_model(data_path='data/processed/cleaned_tweets.csv', model_path='data/
 
     # Chargement des données
     df = pd.read_csv(data_path)
-    df['cleaned_text'] = df['cleaned_text'].apply(preprocess_text)
+    # Aucune opération de nettoyage ici, car les données sont déjà nettoyées dans data_preprocessing.py
 
     # Construction du vocabulaire
     all_words = set(word for text in df['cleaned_text'] for word in text.split())
